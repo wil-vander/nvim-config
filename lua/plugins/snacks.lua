@@ -1,0 +1,41 @@
+return {
+  "folke/snacks.nvim",
+  priority = 1000,
+  lazy = false,
+  ---@type snacks.Config
+  opts = {
+    picker = { enabled = true },
+    explorer = { enabled = true },
+    statuscolumn = { enabled = true },
+    scroll = { enabled = true },
+    dim = { enabled = true },
+    notifier = { enabled = true },
+    gh = { enabled = true },
+    bufdelete = { enabled = true },
+    words = { enabled = true },
+    input = { enabled = true },
+    gitbrowse = { enabled = true },
+  },
+  keys = {
+    { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next reference", mode = { "n", "t" } },
+    { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Previous reference", mode = { "n", "t" } },
+    { "<leader>go", function() Snacks.gitbrowse() end, desc = "Open in GitHub", mode = { "n", "v" } },
+    { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete buffer" },
+    { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss notifications" },
+    { "<leader>nh", function() Snacks.notifier.show_history() end, desc = "Notification history" },
+    { "<leader>zd", function()
+        if Snacks.dim.enabled then Snacks.dim.disable() else Snacks.dim.enable() end
+      end, desc = "Toggle dim" },
+    { "<leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub issues (open)" },
+    { "<leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub issues (all)" },
+    { "<leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub PRs (open)" },
+    { "<leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub PRs (all)" },
+    { "<leader>e", function() Snacks.explorer() end, desc = "File explorer" },
+    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart find files" },
+    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find files" },
+    { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent files" },
+    { "<leader>fh", function() Snacks.picker.help() end, desc = "Help pages" },
+  },
+}
